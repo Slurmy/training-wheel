@@ -39,6 +39,7 @@ function trainingwheel(mod) {
 		if (!isMe(e.gameId)) return;
         let id = skillZeroSub(e.skill.id);
         currentAction = skillZeroSub(id);
+        edgePredict(e.skill.id);
         evalChains();
     });
 
@@ -48,6 +49,7 @@ function trainingwheel(mod) {
         if(lastAction == currentAction) {
             currentAction = null;
         }
+        evalChains();
     });
 
     mod.hook('S_PLAYER_STAT_UPDATE', defs['S_PLAYER_STAT_UPDATE'], {order: -9999}, e => {
@@ -80,9 +82,17 @@ function trainingwheel(mod) {
 
 
 
-
-
-
+    function edgePredict(skillid)
+    {
+        let edgeMod = 0;
+        for(let v of Object.values(allSkills[job])) {
+            if(v.edgeMod) {
+                edgeMod = v.edgeMod['*'];
+                // todo: DG
+            }
+        }
+        edge += edgeMod;
+    }
 
     function isMe(id) {
         return gameId.equals(id);
