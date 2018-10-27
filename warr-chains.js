@@ -1,14 +1,14 @@
 module.exports = [
-    {edge: 10, skills: ['as'],}
-    {edge: 10, skills: ['scythe'],}
-    {edge: 9, skills: ['as'],}
-    {edge: 9, skills: ['cs', 'tc', 'roll', 'scythe'],}
-    {edge: 9, skills: ['chargingslash', 'roll', 'scythe'],}
-    {edge: 9, skills: ['tob', 'roll', 'scythe'],}
+	{edge: 10, skills: ['as'],}
+	{edge: 10, skills: ['scythe'],}
+	{edge: 9, skills: ['as'],}
+	{edge: 9, skills: ['cs', 'tc', 'roll', 'scythe'],}
+	{edge: 9, skills: ['chargingslash', 'roll', 'scythe'],}
+	{edge: 9, skills: ['tob', 'roll', 'scythe'],}
 	{edge: 9, skills: ['rf', 'roll', 'scythe'],}
 	{edge: 9, skills: ['scythe'],}
-    {edge: 8, skills: ['as'],}
-    {edge: 8, skills: ['pb', 'scythe'],}
+	{edge: 8, skills: ['as'],}
+	{edge: 8, skills: ['pb', 'scythe'],}
 	{edge: 8, skills: ['cs', 'rob', 'scythe'],}
 	{edge: 8, skills: ['cs', 'rs', 'roll', 'scythe'],}
 	{edge: 7, skills: ['cs', 'as'],}
@@ -25,8 +25,8 @@ module.exports = [
 	{edge: 7, skills: ['dfa'],}
 	{edge: 7, skills: ['bs'],}
 	
-    {edge: null, skills: ['bw', 'bd'],}
-    {edge: null, skills: ['chargingslash', 'bd'],}
+	{edge: null, skills: ['bw', 'bd'],}
+	{edge: null, skills: ['chargingslash', 'bd'],}
 	{edge: null, skills: ['cs', 'tc', 'bd'],}
 	{edge: null, skills: ['rf', 'bd'],}
 	{edge: null, skills: ['pb'],}
