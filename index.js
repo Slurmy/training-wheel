@@ -11,7 +11,7 @@ function trainingwheel(mod) {
         edge,
         currentAction,
         lastAction,
-        currentChainSkills,
+        currentChainSkillBases,
         cooldowns;
 
 	mod.hook('S_LOGIN', defs['S_LOGIN'], e => {
@@ -20,25 +20,25 @@ function trainingwheel(mod) {
 		job = (templateId - 10101) % 100;
         currentAction = null;
         lastAction = null;
-        currentChainSkills = null;
+        currentChainSkillBases = null;
         initCDs(allSkills[job]);
         //console.log(`[training-wheel] race: ${race} job: ${job} templateId: ${templateId}`);
     });
 
     mod.hook('S_START_COOLTIME_SKILL', defs['S_START_COOLTIME_SKILL'], e => {
-        let id = skillZeroSub(e.skill.id);
+        let id = skillBase(e.skill.id);
         cooldowns[id] = Date.now() + e.cooldown;
+        //console.log(`${id} on cd ${cooldowns[id]}`);
     });
 
     mod.hook('S_DECREASE_COOLTIME_SKILL', defs['S_DECREASE_COOLTIME_SKILL'], e => {
-        let id = skillZeroSub(e.skill.id);
-        cooldowns[skillZeroSub(id)] -= e.cooldown;
+        let id = skillBase(e.skill.id);
+        cooldowns[skillBase(id)] -= e.cooldown;
     });
 
     mod.hook('S_ACTION_STAGE', defs['S_ACTION_STAGE'], {order: -9999}, e => {
 		if (!isMe(e.gameId)) return;
-        let id = skillZeroSub(e.skill.id);
-        currentAction = skillZeroSub(id);
+        currentAction = e.skill.id;
         edgePredict(e.skill.id);
         evalChains();
     });
@@ -49,7 +49,7 @@ function trainingwheel(mod) {
         if(lastAction == currentAction) {
             currentAction = null;
         }
-        evalChains();
+        //evalChains();
     });
 
     mod.hook('S_PLAYER_STAT_UPDATE', defs['S_PLAYER_STAT_UPDATE'], {order: -9999}, e => {
@@ -84,11 +84,14 @@ function trainingwheel(mod) {
 
     function edgePredict(skillid)
     {
+        const base = skillBase(skillid);
+        const sub = skillid % 100;
         let edgeMod = 0;
-        for(let v of Object.values(allSkills[job])) {
-            if(v.edgeMod) {
-                edgeMod = v.edgeMod['*'];
-                // todo: DG
+        let skillObj = allSkills[job][base];
+        if(skillObj && skillObj['*'] && skillObj['*'].edgeMod) {
+            edgeMod = skillObj['*'].edgeMod['*'];
+            if(skillObj[sub] && skillObj[sub].edgeMod) {
+                edgeMod = skillObj[sub].edgeMod['*'];
             }
         }
         edge += edgeMod;
@@ -98,10 +101,9 @@ function trainingwheel(mod) {
         return gameId.equals(id);
     }
 
-    function isOnCd(skill, tolerance) {
-        let id = skillZeroSub(skill);
-        if (cooldowns[id] &&
-            (cooldowns[id] - Number(tolerance)) > Date.now()) {
+    function isOnCd(base, tolerance) {
+        if (cooldowns[base] &&
+            (cooldowns[base] - Number(tolerance)) > Date.now()) {
             return true;
         }
         return false;
@@ -114,28 +116,35 @@ function trainingwheel(mod) {
         }
     }
 
-    function skillZeroSub(id) {
-        return Math.floor(id / 100) * 100;
+    function skillBase(id) {
+        return Math.floor(id / 10000);
     }
 
     function executeCurrentChain() {
-        if (currentChainSkills && currentChainSkills.length) {
-            if (currentAction == currentChainSkills[0]) {
-                currentChainSkills = currentChainSkills.splice(1);
+        if (currentChainSkillBases && currentChainSkillBases.length) {
+            if (currentAction == currentChainSkillBases[0]) {
+                currentChainSkillBases = currentChainSkillBases.splice(1); // remove first skill
                 let cd = false;
-                for (let s of currentChainSkills) {
+                for (let s of currentChainSkillBases) {
                     if (isOnCd(s, 0)) {
-                        cd = true;
-                        break;
+                        return false;
                     }
                 }
-                if (!cd && currentChainSkills.length) {
-                    showSkillsIcons(currentChainSkills);
+                if (!cd && currentChainSkillBases.length) {
+                    //showSkillsIcons(currentChainSkillBases);
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    function getSkillBaseFromText(txt) {
+        for (let k of Object.keys(allSkills[job])) {
+            if (allSkills[job][k]['*'].name == txt) {
+                return k;
+            }
+        }
     }
 
     function evalChains() {
@@ -153,8 +162,8 @@ function trainingwheel(mod) {
             if (edge == chain.edge) {
                 let cd = false;
                 for (let s of chain.skills) {
-                    let skillid = allSkills[job][s];
-                    if (isOnCd(skillid, 0)) {
+                    let base = getSkillBaseFromText(s);
+                    if (isOnCd(base, 0)) {
                         cd = true;
                         break;
                     }
@@ -167,8 +176,8 @@ function trainingwheel(mod) {
             if (chain.edge == null) {
                 let cd = false;
                 for (let s of chain.skills) {
-                    let skillid = allSkills[job][s];
-                    if (isOnCd(skillid, 0)) {
+                    let base = getSkillBaseFromText(s);
+                    if (isOnCd(base, 0)) {
                         cd = true;
                         break;
                     }
@@ -181,8 +190,8 @@ function trainingwheel(mod) {
             if (edge > chain.edge) {
                 let cd = false;
                 for (let s of chain.skills) {
-                    let skillid = allSkills[job][s];
-                    if (isOnCd(skillid, 0)) {
+                    let base = getSkillBaseFromText(s);
+                    if (isOnCd(base, 0)) {
                         cd = true;
                         break;
                     }
@@ -194,19 +203,20 @@ function trainingwheel(mod) {
             }
         }
         if (bestChain) {
-            currentChainSkills = [];
+            currentChainSkillBases = [];
             for (let s of bestChain.skills) {
-                currentChainSkills.push(allSkills[job][s]);
+                currentChainSkillBases.push(getSkillBaseFromText(s));
             }
-            showSkillsIcons(currentChainSkills);
+            showSkillsIcons(currentChainSkillBases);
         }
     }
 
-    function showSkillsIcons(skills) {
-        const count = skills.length;
+    function showSkillsIcons(bases) {
+        const count = bases.length;
         let msg = '';
         for (let i = 0; i < count; i++) {
-            msg += `<img src="img://skill__0__${mod.game.me.templateId}__${skills[i]}" width="48" height="48" hspace="${300 - i * 50}" vspace="-400"/>`
+            let id = bases[i] * 10000 + 100;
+            msg += `<img src="img://skill__0__${mod.game.me.templateId}__${id}" width="48" height="48" hspace="${300 - i * 50}" vspace="-400"/>`
         }
         mod.send('S_DUNGEON_EVENT_MESSAGE', defs['S_DUNGEON_EVENT_MESSAGE'], {
             message: msg,

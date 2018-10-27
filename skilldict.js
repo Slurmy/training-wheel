@@ -1,105 +1,135 @@
 module.exports = {
     0: {
-        'rob': {
-            id: 40900,
-            edgeMod: {
-                '*': 1,
-                __dgabnorm__: 2
+        4: {
+            '*':{
+                name: 'rob',
+                edgeMod: {
+                    '*': 1,
+                    __dgabnorm__: 2
+                },
             },
         },
-        'chargingslash': {
-            id: 161000,
-            edgeMod: {
-                '*': 1,
+        16: {
+            '*':{
+                name: 'chargingslash',
+                edgeMod: {
+                    '*': 1,
+                },
             },
         },
-        'scythe': {
-            id: 300900,
-            edgeMod: {
-                '*': -10,
+        30: {
+            '*':{
+                name: 'scythe',
+                edgeMod: {
+                    '*': -10,
+                },
             },
         },
-        'as': {
-            id: 410100,
-            edgeMod: {
-                '*': -10, // ugh
+        41: {
+            '*':{
+                name: 'as',
+                edgeMod: {
+                    '*': 2,
+                },
+            },
+            31: {
+                edgeMod: {
+                    '*': -10,
+                },
+            }
+        },
+        3: {
+            '*':{
+                name: 'tob',
+                edgeMod: {
+                    '*': 1,
+                },
             },
         },
-        'tob': {
-            id: 30300,
-            edgeMod: {
-                '*': 1,
+        31: {
+            '*':{
+                name: 'rs',
+                edgeMod: {
+                    '*': 1,
+                },
             },
         },
-        'rs': {
-            id: 310800,
-            edgeMod: {
-                '*': 1,
+        42: {
+            '*':{
+                name: 'bf',
             },
         },
-        'bf': {
-            id: 420100,
-        },
-        'cs': {
-            id: 181100,
-            edgeMod: {
-                '*': 1,
+        18: {
+            '*':{
+                name: 'cs',
+                edgeMod: {
+                    '*': 1,
+                },
             },
         },
-        'bw': {
-            id: 400100,
-            edgeMod: {
-                '*': 1,
+        40: {
+            '*':{
+                name: 'bw',
+                edgeMod: {
+                    '*': 1,
+                },
             },
         },
-        'dfa': {
-            id: 100700,
-            edgeMod: {
-                '*': 1,
+        10: {
+            '*':{
+                name: 'dfa',
+                edgeMod: {
+                    '*': 1,
+                },
             },
         },
-        'rf': {
-            id: 191100,
-            edgeMod: {
-                '*': 1,
+        19: {
+            '*':{
+                name: 'rf',
+                edgeMod: {
+                    '*': 1,
+                },
             },
         },
-        'bs': {
-            id: 220200,
-            edgeMod: {
-                '*': 2,
+        22: {
+            '*':{
+                name: 'bs',
+                edgeMod: {
+                    '*': 2,
+                },
             },
         },
-        'cascade': {
-            id: 210500,
-        },
-        'dg': {
-            id: 200200,
-        },
-        'leaping': {
-            id: 120800,
-        },
-        'binding': {
-            id: 340100,
-        },
-        'pb': {
-            id: 111100,
-            edgeMod: {
-                '*': 2,
+        20: {
+            '*':{
+                name: 'dg',
             },
         },
-        'tc': {
-            id: 281000,
-        },
-        'bd': {
-            id: 290900,
-            edgeMod: {
-                '*': 2,
-                __dgabnorm__: 4
+        11: {
+            '*':{
+                name: 'pb',
+                edgeMod: {
+                    '*': 2,
+                },
             },
         },
-        'roll': {
-            id: 20100,
+        28: {
+            '*':{
+                name: 'tc',
+            },
+        },
+        29: {
+            '*':{
+                name: 'bd',
+                edgeMod: {
+                    '*': 2,
+                    __dgabnorm__: 4
+                },
+            },
+        },
+        2: {
+            '*':{
+                name: 'roll',
+            },
         }
     }
 };
