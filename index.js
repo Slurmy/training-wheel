@@ -31,6 +31,7 @@ function trainingwheel(mod) {
         currentChainSkills = null;
         initCDs(allSkills[job]);
         abnormies = {};
+        edge = 0;
         //console.log(`[trainingwheel] race: ${race} job: ${job} templateId: ${templateId}`);
     });
 

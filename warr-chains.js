@@ -4,6 +4,7 @@ module.exports = [
 
 	{edge: 9, skills: ['as-0']},
 	{edge: 9, skills: ['cs', 'tc']},
+	{edge: 9, skills: ['cs']},
 	{edge: 9, skills: ['chargingslash-1']},
 	{edge: 9, skills: ['tob']},
 	{edge: 9, skills: ['rf-1']},
