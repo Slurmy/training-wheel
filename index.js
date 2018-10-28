@@ -19,6 +19,9 @@ function trainingwheel(mod) {
 
     mod.command.add('isuck', () => {
         enable = !enable;
+        if (allSkills[job] == null) {
+            enable = false;
+        }
         mod.command.message(`you ${enable ? "don't" : "still"} suck`);
     });
 
@@ -29,6 +32,9 @@ function trainingwheel(mod) {
         currentAction = null;
         lastAction = null;
         currentChainSkills = null;
+        if (allSkills[job] == null) {
+            enable = false;
+        }
         initCDs(allSkills[job]);
         abnormies = {};
         edge = 0;
@@ -137,7 +143,7 @@ function trainingwheel(mod) {
     }
 
     function isMe(id) {
-        return gameId.equals(id);
+        return (enable && gameId.equals(id));
     }
 
     function isOnCd(base, tolerance) {
