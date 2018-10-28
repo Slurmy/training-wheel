@@ -63,7 +63,7 @@ function trainingwheel(mod) {
     });
 
     mod.hook('S_PLAYER_STAT_UPDATE', defs['S_PLAYER_STAT_UPDATE'], {order: -9999}, e => {
-        edge = e.edge;
+        //edge = e.edge;
     });
 
     mod.hook('S_ABNORMALITY_END', defs['S_ABNORMALITY_END'], e => {
