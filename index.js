@@ -232,7 +232,7 @@ function trainingwheel(mod) {
         let bestIndex = null;
         let bestScore = 0;
 
-        const edgeMatchBonus = 3000;
+        const edgeMatchBonus = 10000;
         const edgeNullBonus = 2000;
         const edgeOverFlowBonus = 1000;
         const orderFactor = 10;
@@ -280,6 +280,21 @@ function trainingwheel(mod) {
                 let { base, sub } = getSkillFromString(s);
                 currentChainSkills.push(base * 10000 + sub);
             }
+
+            // find and add finisher for 7 or more edge matched chains
+            if (edge >=7 && edge < 10 && bestScore >= 9000) {
+                for (let i = 0; i < chains.length; i++) {
+                    let chain = chains[i];
+                    if(chain.edge == 10 && testChainCds(chain)) {
+                        for (let s of chain.skills) {
+                            let { base, sub } = getSkillFromString(s);
+                            currentChainSkills.push(base * 10000 + sub);
+                        }
+                        break;
+                    }
+                }
+            }
+
             console.log(`[trainingwheel] selecting new chain edge: ${edge} -------- [${bestIndex}]${bestChain.skills}`);
             showSkillsIcons(currentChainSkills);
 
