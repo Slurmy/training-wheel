@@ -5,13 +5,15 @@ module.exports = {
                 name: 'rob',
                 edgeMod: {
                     '*': 1,
-                    __dgabnorm__: 2
+                    100801: 2
                 },
             },
         },
         16: {
             '*':{
                 name: 'chargingslash',
+            },
+            1:{
                 edgeMod: {
                     '*': 1,
                 },
@@ -90,6 +92,11 @@ module.exports = {
                     '*': 1,
                 },
             },
+            1: {
+                edgeMod: {
+                    '*': 1,
+                },
+            }
         },
         22: {
             '*':{
@@ -122,7 +129,7 @@ module.exports = {
                 name: 'bd',
                 edgeMod: {
                     '*': 2,
-                    __dgabnorm__: 4
+                    100801: 4
                 },
             },
         },
