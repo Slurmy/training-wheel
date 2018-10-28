@@ -13,8 +13,14 @@ function trainingwheel(mod) {
         lastAction,
         currentChainSkills,
         cooldowns,
-        abnormies;
+        abnormies,
+        enable = false;
 
+
+    mod.command.add('isuck', () => {
+        enable = !enable;
+        mod.command.message(`you ${enable ? "don't" : "still"} suck`);
+    });
 
 	mod.hook('S_LOGIN', defs['S_LOGIN'], e => {
 		({ gameId, templateId } = e);
@@ -186,7 +192,7 @@ function trainingwheel(mod) {
         if (currentChainSkills && currentChainSkills.length == 0) {
             currentChainSkills = null;
         }
-        console.log(`[trainingwheel] executed (${res}) current chain   ${currentAction} | ${currentChainSkills}`);
+        //console.log(`[trainingwheel] executed (${res}) current chain   ${currentAction} | ${currentChainSkills}`);
         return res;
     }
 
@@ -295,7 +301,7 @@ function trainingwheel(mod) {
                 }
             }
 
-            console.log(`[trainingwheel] selecting new chain edge: ${edge} -------- ${bestScore} [${bestIndex}]${bestChain.skills}`);
+            //console.log(`[trainingwheel] selecting new chain edge: ${edge} -------- ${bestScore} [${bestIndex}]${bestChain.skills}`);
             showSkillsIcons(currentChainSkills);
 
             //executeCurrentChain();
@@ -311,15 +317,16 @@ function trainingwheel(mod) {
             let id = Math.floor(skillids[i] / 10000) * 10000 + 100; // set skill to lvl so there's acutally icon for it
             msg += `<img src="img://skill__0__${mod.game.me.templateId}__${id}" width="48" height="48" hspace="${300 - i * 50}" vspace="-400"/>`
         }
-        mod.send('S_DUNGEON_EVENT_MESSAGE', defs['S_DUNGEON_EVENT_MESSAGE'], {
-            message: msg,
-            type: 2,
-            chat: false,
-            channel: 0
-        });
+
+        if(enable) {
+            mod.send('S_DUNGEON_EVENT_MESSAGE', defs['S_DUNGEON_EVENT_MESSAGE'], {
+                message: msg,
+                type: 2,
+                chat: false,
+                channel: 0
+            });
+        }
     }
-
-
 }
 
 module.exports = trainingwheel;
