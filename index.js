@@ -34,6 +34,7 @@ function trainingwheel(mod) {
         currentChainSkills = null;
         abnormies = {};
         edge = 0;
+        cooldowns = {};
         if (allSkills[job] == null) {
             enable = false;
             return;
@@ -156,7 +157,6 @@ function trainingwheel(mod) {
     }
 
     function initCDs(skills) {
-        cooldowns = {};
         for (let s of Object.keys(skills)) {
             cooldowns[s] = 0;
         }
