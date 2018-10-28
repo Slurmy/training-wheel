@@ -32,12 +32,13 @@ function trainingwheel(mod) {
         currentAction = null;
         lastAction = null;
         currentChainSkills = null;
-        if (allSkills[job] == null) {
-            enable = false;
-        }
-        initCDs(allSkills[job]);
         abnormies = {};
         edge = 0;
+        if (allSkills[job] == null) {
+            enable = false;
+            return;
+        }
+        initCDs(allSkills[job]);
         //console.log(`[trainingwheel] race: ${race} job: ${job} templateId: ${templateId}`);
     });
 
