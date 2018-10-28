@@ -1,10 +1,12 @@
 module.exports = [
+    /* this is broken uwu
 	{abnorm: 100801, edge: 7, skills: ['bw', 'pb', 'as-31']},
 	{abnorm: 100801, edge: 7, skills: ['bw', 'pb', 'scythe']},
 	{abnorm: 100801, edge: 5, skills: ['bw', 'bd', 'as-31']},
 	{abnorm: 100801, edge: 5, skills: ['bw', 'bd', 'scythe']},
 	{abnorm: 100801, edge: 5, skills: ['bw', 'rob', 'bw', 'pb', 'as-31']},
 	{abnorm: 100801, edge: 5, skills: ['bw', 'rob', 'bw', 'pb', 'scythe']},
+    */
 
 	{edge: 10, skills: ['as-31']},
 	{edge: 10, skills: ['scythe']},
@@ -30,7 +32,7 @@ module.exports = [
 	{edge: 7, skills: ['chargingslash-1', 'bd']},
 	{edge: 7, skills: ['cs', 'tc', 'bd']},
 	{edge: 7, skills: ['rf-1', 'bd']},
-	{edge: 7, skills: ['cs', 'rob', 'rs', 'roll']},
+	{edge: 7, skills: ['cs', 'rob', 'rs', 'roll', 'scythe']},
 
     /* wai>?? let null take care of it
 	{edge: 7, skills: ['pb']},
@@ -49,6 +51,5 @@ module.exports = [
 	{edge: null, skills: ['cs', 'rob']},
 	{edge: null, skills: ['cs', 'rs']},
 	{edge: null, skills: ['bs']},
-	{edge: null, skills: ['cs', 'reaping']},
 	{edge: null, skills: ['dfa']},
 ];

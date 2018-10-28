@@ -234,6 +234,7 @@ function trainingwheel(mod) {
         // find a new chain to show
         for (let chain of chains) {
             index++;
+            /*
             if (chain.abnorm &&
                 abnormies[chain.abnorm] != null &&
                 edge == chain.edge) {
@@ -243,6 +244,7 @@ function trainingwheel(mod) {
                     break;
                 }
             }
+            */
             if (edge == chain.edge) {
                 if(testChainCds(chain)) {
                     bestChain = chain;
