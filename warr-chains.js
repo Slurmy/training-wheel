@@ -1,16 +1,8 @@
 module.exports = [
-    /*
-	{abnorm: 100801, edge: 8, skills: ['as-0']},
-	{abnorm: 100801, edge: 8, skills: ['pb']},
-	{abnorm: 100801, edge: 7, skills: ['bw', 'as-0']},
-	{abnorm: 100801, edge: 7, skills: ['bw', 'pb']},
-	{abnorm: 100801, edge: 5, skills: ['bw', 'bd']},
-	{abnorm: 100801, edge: 5, skills: ['bw', 'rob', 'pb']},
-    */
-
 	{edge: 10, skills: ['as-31']},
 	{edge: 10, skills: ['scythe']},
 
+	{edge: 9, skills: ['as-0']},
 	{edge: 9, skills: ['cs', 'tc']},
 	{edge: 9, skills: ['chargingslash-1']},
 	{edge: 9, skills: ['tob']},
@@ -35,12 +27,6 @@ module.exports = [
 	{edge: 7, skills: ['rf-1', 'bd']},
 	{edge: 7, skills: ['cs', 'rob', 'rs']},
 
-    /* wai>?? let null take care of it
-	{edge: 7, skills: ['pb']},
-	{edge: 7, skills: ['dfa']},
-	{edge: 7, skills: ['bs']},
-    */
-
 	{edge: null, skills: ['bw', 'bd']},
 	{edge: null, skills: ['chargingslash-1', 'bd']},
 	{edge: null, skills: ['cs', 'tc', 'bd']},
@@ -51,4 +37,17 @@ module.exports = [
 	{edge: null, skills: ['bs']},
 	{edge: null, skills: ['tob']},
 	{edge: null, skills: ['dfa']},
+
+	{abnorm: 100801, edge: 10, skills: ['as-31']},
+	{abnorm: 100801, edge: 10, skills: ['dgscythe']},
+	{abnorm: 100801, edge: 8, skills: ['as-0']},
+	{abnorm: 100801, edge: 8, skills: ['pb']},
+	{abnorm: 100801, edge: 7, skills: ['bw', 'as-0']},
+	{abnorm: 100801, edge: 7, skills: ['bw', 'pb']},
+	{abnorm: 100801, edge: 5, skills: ['bw', 'bd']},
+	{abnorm: 100801, edge: 5, skills: ['bw', 'dgrob', 'pb']},
+	{abnorm: 100801, edge: null, skills: ['bw', 'dgbd']},
+	{abnorm: 100801, edge: null, skills: ['chargingslash-1', 'dgbd']},
+	{abnorm: 100801, edge: null, skills: ['cs', 'tc', 'dgbd']},
+
 ];

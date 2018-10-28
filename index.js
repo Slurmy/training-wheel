@@ -105,23 +105,28 @@ function trainingwheel(mod) {
         // skill sub edge mode
         if(skillObj && skillObj[sub] && skillObj[sub].edgeMod) {
             edgeMod = skillObj[sub].edgeMod['*'];
+            /*
             for(let abnormKey of Object.keys(skillObj[sub].edgeMod)) {
                 if(abnormies[abnormKey] && abnormies[abnormKey].end > Date.now()) {
                     edgeMod = skillObj[sub].edgeMod[abnormKey];
                 }
             }
+            */
         }
         // default edge mod
         else if(skillObj && skillObj['*'] && skillObj['*'].edgeMod) {
             edgeMod = skillObj['*'].edgeMod['*'];
+            /*
             for(let abnormKey of Object.keys(skillObj['*'].edgeMod)) {
                 if(abnormies[abnormKey] && abnormies[abnormKey].end > Date.now()) {
                     edgeMod = skillObj['*'].edgeMod[abnormKey];
                 }
             }
+            */
         }
         edge += edgeMod;
         if(edge > 10) edge = 10;
+        else if(edge < 0) edge = 0;
     }
 
     function isMe(id) {
@@ -232,40 +237,35 @@ function trainingwheel(mod) {
         let bestIndex = null;
         let bestScore = 0;
 
-        const edgeMatchBonus = 10000;
+        const abnormMatchBonus = 10000;
+        const edgeMatchBonus = 3000;
         const edgeNullBonus = 2000;
         const edgeOverFlowBonus = 1000;
-        const orderFactor = 10;
+        const orderFactor = 1;
 
         // find a new chain to show
         for (let i = 0; i < chains.length; i++) {
             let chain = chains[i];
             let score = 0;
-            /*
+
+            if(!testChainCds(chain)) continue;
+            score += (chains.length - i) * orderFactor;
+
             if (chain.abnorm &&
                 abnormies[chain.abnorm] != null &&
-                edge == chain.edge)
+                abnormies[chain.abnorm].end > Date.now())
             {
-                if(testChainCds(chain)) {
-                    // TODO: score
-                }
+                score += abnormMatchBonus;
             }
-            */
+
             if (edge == chain.edge) {
-                if(testChainCds(chain)) {
-                    score = edgeMatchBonus - (orderFactor * i);
-                }
+                score += edgeMatchBonus;
             }
-            if (chain.edge == null) {
-                if(testChainCds(chain)) {
-                    score = 1000 - (100 * i);
-                    score = edgeNullBonus - (orderFactor * i);
-                }
+            else if (chain.edge == null) {
+                score += edgeNullBonus;
             }
-            if (edge > chain.edge) {
-                if(testChainCds(chain)) {
-                    score = edgeOverFlowBonus - (orderFactor * i);
-                }
+            else if (edge > chain.edge) {
+                score += edgeOverFlowBonus;
             }
 
             if (score > bestScore) {
@@ -282,7 +282,7 @@ function trainingwheel(mod) {
             }
 
             // find and add finisher for 7 or more edge matched chains
-            if (edge >=7 && edge < 10 && bestScore >= 9000) {
+            if (edge >=7 && edge < 10 && bestScore >= 3000 && bestScore < 10000) {
                 for (let i = 0; i < chains.length; i++) {
                     let chain = chains[i];
                     if(chain.edge == 10 && testChainCds(chain)) {
@@ -295,7 +295,7 @@ function trainingwheel(mod) {
                 }
             }
 
-            console.log(`[trainingwheel] selecting new chain edge: ${edge} -------- [${bestIndex}]${bestChain.skills}`);
+            console.log(`[trainingwheel] selecting new chain edge: ${edge} -------- ${bestScore} [${bestIndex}]${bestChain.skills}`);
             showSkillsIcons(currentChainSkills);
 
             //executeCurrentChain();

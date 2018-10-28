@@ -5,7 +5,6 @@ module.exports = {
                 name: 'rob',
                 edgeMod: {
                     '*': 1,
-                    100801: 2
                 },
             },
         },
@@ -129,7 +128,30 @@ module.exports = {
                 name: 'bd',
                 edgeMod: {
                     '*': 2,
-                    100801: 4
+                },
+            },
+        },
+        36: {
+            '*':{
+                name: 'dbrob',
+                edgeMod: {
+                    '*': 2,
+                },
+            },
+        },
+        37: {
+            '*':{
+                name: 'dgbd',
+                edgeMod: {
+                    '*': 4,
+                },
+            },
+        },
+        38: {
+            '*':{
+                name: 'dgscythe',
+                edgeMod: {
+                    '*': -10,
                 },
             },
         },
